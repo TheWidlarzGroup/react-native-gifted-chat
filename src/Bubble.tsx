@@ -1,15 +1,16 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import {
-  Text,
   Clipboard,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  View,
   StyleProp,
-  ViewStyle,
+  StyleSheet,
+  Text,
   TextStyle,
+  View,
+  ViewStyle,
 } from 'react-native'
+
+import { TouchableWithoutFeedback } from '@gorhom/bottom-sheet'
 
 import QuickReplies from './QuickReplies'
 
@@ -21,16 +22,8 @@ import MessageAudio from './MessageAudio'
 import Time from './Time'
 import Color from './Color'
 
-import { StylePropType, isSameUser, isSameDay } from './utils'
-import {
-  User,
-  IMessage,
-  LeftRightStyle,
-  Reply,
-  Omit,
-  MessageVideoProps,
-  MessageAudioProps,
-} from './Models'
+import { isSameDay, isSameUser, StylePropType } from './utils'
+import { IMessage, LeftRightStyle, MessageAudioProps, MessageVideoProps, Omit, Reply, User } from './Models'
 
 const styles = {
   left: StyleSheet.create({

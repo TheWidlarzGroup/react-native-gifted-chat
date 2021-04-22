@@ -1,16 +1,12 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import {
-  Text,
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  StyleProp,
-  ViewStyle,
-} from 'react-native'
+import { StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native'
+
+import { TouchableOpacity } from '@gorhom/bottom-sheet'
+
 import { IMessage, Reply } from './Models'
 import Color from './Color'
-import { warning, StylePropType } from './utils'
+import { StylePropType, warning } from './utils'
 
 const styles = StyleSheet.create({
   container: {

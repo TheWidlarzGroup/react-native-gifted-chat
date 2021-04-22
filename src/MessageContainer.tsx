@@ -3,25 +3,26 @@ import React, { RefObject } from 'react'
 
 import {
   FlatList,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  ListViewProps,
   ListRenderItemInfo,
-  NativeSyntheticEvent,
+  ListViewProps,
   NativeScrollEvent,
-  StyleProp,
-  ViewStyle,
+  NativeSyntheticEvent,
   Platform,
+  StyleProp,
+  StyleSheet,
+  Text,
+  View,
+  ViewStyle,
 } from 'react-native'
 
 import LoadEarlier from './LoadEarlier'
 import Message from './Message'
 import Color from './Color'
-import { User, IMessage, Reply } from './Models'
-import { warning, StylePropType } from './utils'
+import { IMessage, Reply, User } from './Models'
+import { StylePropType, warning } from './utils'
 import TypingIndicator from './TypingIndicator'
+import { BottomSheetFlatList, TouchableOpacity } from '@gorhom/bottom-sheet'
+
 
 const styles = StyleSheet.create({
   container: {
@@ -341,7 +342,7 @@ export default class MessageContainer<
         {this.state.showScrollBottom && this.props.scrollToBottom
           ? this.renderScrollToBottomWrapper()
           : null}
-        <FlatList
+        <BottomSheetFlatList
           ref={this.props.forwardRef}
           extraData={[this.props.extraData, this.props.isTyping]}
           keyExtractor={this.keyExtractor}

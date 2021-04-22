@@ -1,16 +1,10 @@
 import PropTypes from 'prop-types'
 import React, { ReactNode } from 'react'
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  StyleProp,
-  ViewStyle,
-  TextStyle,
-} from 'react-native'
+import { StyleProp, StyleSheet, Text, TextStyle, View, ViewStyle } from 'react-native'
 import Color from './Color'
 import { StylePropType } from './utils'
+
+import { TouchableOpacity } from '@gorhom/bottom-sheet'
 
 export interface ActionsProps {
   options?: { [key: string]: any }

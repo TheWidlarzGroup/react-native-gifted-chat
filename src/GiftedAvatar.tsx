@@ -3,13 +3,17 @@ import React from 'react'
 import {
   Image,
   Text,
-  TouchableOpacity,
   View,
   StyleSheet,
   StyleProp,
   ImageStyle,
   TextStyle,
 } from 'react-native'
+
+import {
+  TouchableOpacity,
+} from '@gorhom/bottom-sheet';
+
 import Color from './Color'
 import { User } from './Models'
 import { StylePropType } from './utils'

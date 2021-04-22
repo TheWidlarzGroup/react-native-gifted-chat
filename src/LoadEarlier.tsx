@@ -1,18 +1,10 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import {
-  ActivityIndicator,
-  Platform,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  StyleProp,
-  ViewStyle,
-  TextStyle,
-} from 'react-native'
+import { ActivityIndicator, Platform, StyleProp, StyleSheet, Text, TextStyle, View, ViewStyle } from 'react-native'
 import Color from './Color'
 import { StylePropType } from './utils'
+
+import { TouchableOpacity } from '@gorhom/bottom-sheet'
 
 const styles = StyleSheet.create({
   container: {

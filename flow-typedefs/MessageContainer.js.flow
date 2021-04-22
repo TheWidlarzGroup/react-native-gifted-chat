@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react'
-import { FlatList } from 'react-native'
+
+import { BottomSheetFlatList } from '@gorhom/bottom-sheet'
 import type { LoadEarlierProps } from './LoadEarlier'
 import type { MessageProps } from './Message'
 import type { User, IMessage, Reply } from './types'
@@ -9,7 +10,7 @@ import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet
 export type MessageContainerProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   messages?: Array<TMessage>,
   user?: User,
-  listViewProps: $Shape<React.ElementProps<typeof FlatList>>,
+  listViewProps: $Shape<React.ElementProps<typeof BottomSheetFlatList>>,
   inverted?: boolean,
   loadEarlier?: boolean,
   alignTop?: boolean,
@@ -17,7 +18,7 @@ export type MessageContainerProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
   invertibleScrollViewProps?: any,
   extraData?: any,
   scrollToBottomOffset?: number,
-  forwardRef?: React.Ref<typeof FlatList>,
+  forwardRef?: React.Ref<typeof BottomSheetFlatList>,
   renderFooter?: (MessageContainerProps<TMessage>) => React.Node,
   renderMessage?: (MessageProps<TMessage>) => React.Node,
   renderLoadEarlier?: LoadEarlierProps => React.Node,

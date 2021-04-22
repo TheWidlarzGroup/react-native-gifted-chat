@@ -30,7 +30,6 @@ import Send from './Send'
 import type { SendProps } from './Send'
 import Time from './Time'
 import type { TimeProps } from './Time'
-import QuickReplies from './QuickReplies'
 import type { QuickRepliesProps } from './QuickReplies'
 import MessageContainer from './MessageContainer.js.flow'
 import GiftedAvatar from './GiftedAvatar.js.flow'
@@ -42,6 +41,8 @@ import type {
   ViewStyleProp,
 } from 'react-native/Libraries/StyleSheet/StyleSheet'
 import { FlatList } from 'react-native'
+
+
 import * as utils from './utils'
 
 export type GiftedChatProps<TMessage: IMessage = IMessage> = $ReadOnly<{|
