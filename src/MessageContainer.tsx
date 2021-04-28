@@ -21,7 +21,7 @@ import Color from './Color'
 import { IMessage, Reply, User } from './Models'
 import { StylePropType, warning } from './utils'
 import TypingIndicator from './TypingIndicator'
-import { BottomSheetFlatList, TouchableOpacity } from '@gorhom/bottom-sheet'
+import { BottomSheetFlatList, BottomSheetView, TouchableOpacity } from '@gorhom/bottom-sheet'
 
 
 const styles = StyleSheet.create({
@@ -335,7 +335,7 @@ export default class MessageContainer<
   render() {
     const { inverted } = this.props
     return (
-      <View
+      <BottomSheetView
         style={
           this.props.alignTop ? styles.containerAlignTop : styles.container
         }
@@ -369,7 +369,7 @@ export default class MessageContainer<
           onEndReachedThreshold={0.1}
           {...this.props.listViewProps}
         />
-      </View>
+      </BottomSheetView>
     )
   }
 }
