@@ -20,9 +20,9 @@ export const ModalProvider: FC<Props> = ({ children, displayInModal }) => {
 export const useModalContext = () => {
   const context = useContext(ModalContext)
 
-  if (typeof context !== 'boolean') {
-    return context
+  if (context === null) {
+    throw Error('Use this hook in Provider scope')
   }
 
-  throw Error('Use this hook in Provider scope')
+  return context
 }
