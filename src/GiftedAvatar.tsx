@@ -10,13 +10,10 @@ import {
   TextStyle,
 } from 'react-native'
 
-import {
-  TouchableOpacity,
-} from '@gorhom/bottom-sheet';
-
 import Color from './Color'
 import { User } from './Models'
 import { StylePropType } from './utils'
+import CustomTouchableOpacity from './bottomSheet/TouchableOpacity'
 
 const {
   carrot,
@@ -141,15 +138,6 @@ export default class GiftedAvatar extends React.Component<GiftedAvatarProps> {
     )
   }
 
-  handleOnPress = () => {
-    const { onPress, ...other } = this.props
-    if (this.props.onPress) {
-      this.props.onPress(other)
-    }
-  }
-
-  handleOnLongPress = () => {}
-
   render() {
     if (
       !this.props.user ||
@@ -169,21 +157,21 @@ export default class GiftedAvatar extends React.Component<GiftedAvatarProps> {
     }
     if (this.props.user.avatar) {
       return (
-        <TouchableOpacity
+        <CustomTouchableOpacity
           disabled={!this.props.onPress}
           onPress={this.props.onPress}
           onLongPress={this.props.onLongPress}
           accessibilityTraits='image'
         >
           {this.renderAvatar()}
-        </TouchableOpacity>
+        </CustomTouchableOpacity>
       )
     }
 
     this.setAvatarColor()
 
     return (
-      <TouchableOpacity
+      <CustomTouchableOpacity
         disabled={!this.props.onPress}
         onPress={this.props.onPress}
         onLongPress={this.props.onLongPress}
@@ -195,7 +183,7 @@ export default class GiftedAvatar extends React.Component<GiftedAvatarProps> {
         accessibilityTraits='image'
       >
         {this.renderInitials()}
-      </TouchableOpacity>
+      </CustomTouchableOpacity>
     )
   }
 }

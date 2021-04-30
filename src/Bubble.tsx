@@ -1,16 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import {
-  Clipboard,
-  StyleProp,
-  StyleSheet,
-  Text,
-  TextStyle,
-  View,
-  ViewStyle,
-} from 'react-native'
-
-import { TouchableWithoutFeedback } from '@gorhom/bottom-sheet'
+import { Clipboard, StyleProp, StyleSheet, Text, TextStyle, View, ViewStyle } from 'react-native'
 
 import QuickReplies from './QuickReplies'
 
@@ -24,6 +14,7 @@ import Color from './Color'
 
 import { isSameDay, isSameUser, StylePropType } from './utils'
 import { IMessage, LeftRightStyle, MessageAudioProps, MessageVideoProps, Omit, Reply, User } from './Models'
+import CustomTouchableWithoutFeedback from './bottomSheet/TouchableWithoutFeedback'
 
 const styles = {
   left: StyleSheet.create({
@@ -517,7 +508,7 @@ export default class Bubble<
             wrapperStyle && wrapperStyle[position],
           ]}
         >
-          <TouchableWithoutFeedback
+          <CustomTouchableWithoutFeedback
             onPress={this.onPress}
             onLongPress={this.onLongPress}
             accessibilityTraits='text'
@@ -536,7 +527,7 @@ export default class Bubble<
                 {this.renderTicks()}
               </View>
             </View>
-          </TouchableWithoutFeedback>
+          </CustomTouchableWithoutFeedback>
         </View>
         {this.renderQuickReplies()}
       </View>

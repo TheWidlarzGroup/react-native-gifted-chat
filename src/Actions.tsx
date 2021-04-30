@@ -1,10 +1,16 @@
 import PropTypes from 'prop-types'
 import React, { ReactNode } from 'react'
-import { StyleProp, StyleSheet, Text, TextStyle, View, ViewStyle } from 'react-native'
+import {
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextStyle,
+  View,
+  ViewStyle,
+} from 'react-native'
 import Color from './Color'
 import { StylePropType } from './utils'
-
-import { TouchableOpacity } from '@gorhom/bottom-sheet'
+import CustomTouchableOpacity from './bottomSheet/TouchableOpacity'
 
 export interface ActionsProps {
   options?: { [key: string]: any }
@@ -72,12 +78,12 @@ export default class Actions extends React.Component<ActionsProps> {
 
   render() {
     return (
-      <TouchableOpacity
+      <CustomTouchableOpacity
         style={[styles.container, this.props.containerStyle]}
         onPress={this.props.onPressActionButton || this.onActionsPress}
       >
         {this.renderIcon()}
-      </TouchableOpacity>
+      </CustomTouchableOpacity>
     )
   }
 }

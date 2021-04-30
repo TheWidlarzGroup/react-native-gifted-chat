@@ -6,7 +6,6 @@ import {
   Text,
   Clipboard,
   StyleSheet,
-  TouchableOpacity,
   View,
   ViewPropTypes,
   Platform,
@@ -18,6 +17,7 @@ import {
   Time,
   utils,
 } from 'react-native-gifted-chat'
+import CustomTouchableOpacity from '../../src/bottomSheet/TouchableOpacity'
 
 const { isSameUser, isSameDay } = utils
 
@@ -195,7 +195,7 @@ export default class Bubble extends React.Component {
 
     return (
       <View style={[styles.container, this.props.containerStyle]}>
-        <TouchableOpacity
+        <CustomTouchableOpacity
           onLongPress={this.onLongPress}
           accessibilityTraits='text'
           {...this.props.touchableProps}
@@ -208,7 +208,7 @@ export default class Bubble extends React.Component {
               {this.renderMessageText()}
             </View>
           </View>
-        </TouchableOpacity>
+        </CustomTouchableOpacity>
       </View>
     )
   }

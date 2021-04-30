@@ -2,11 +2,11 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { StyleProp, StyleSheet, Text, TextStyle, TouchableOpacityProps, View, ViewStyle } from 'react-native'
 
-import { TouchableOpacity } from '@gorhom/bottom-sheet'
 
 import Color from './Color'
 import { IMessage } from './Models'
 import { StylePropType } from './utils'
+import CustomTouchableOpacity from './bottomSheet/TouchableOpacity'
 
 const styles = StyleSheet.create({
   container: {
@@ -86,7 +86,7 @@ export default class Send<
     } = this.props
     if (alwaysShowSend || (text && text.trim().length > 0)) {
       return (
-        <TouchableOpacity
+        <CustomTouchableOpacity
           testID='send'
           accessible
           accessibilityLabel='send'
@@ -99,7 +99,7 @@ export default class Send<
           <View>
             {children || <Text style={[styles.text, textStyle]}>{label}</Text>}
           </View>
-        </TouchableOpacity>
+        </CustomTouchableOpacity>
       )
     }
     return <View />

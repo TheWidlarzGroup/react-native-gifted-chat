@@ -2,11 +2,10 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native'
 
-import { TouchableOpacity } from '@gorhom/bottom-sheet'
-
 import { IMessage, Reply } from './Models'
 import Color from './Color'
 import { StylePropType, warning } from './utils'
+import CustomTouchableOpacity from './bottomSheet/TouchableOpacity'
 
 const styles = StyleSheet.create({
   container: {
@@ -150,7 +149,7 @@ export default class QuickReplies extends Component<
     const { sendText, renderQuickReplySend: customSend } = this.props
 
     return (
-      <TouchableOpacity
+      <CustomTouchableOpacity
         style={[styles.quickReply, styles.sendLink]}
         onPress={this.handleSend(replies)}
       >
@@ -159,7 +158,7 @@ export default class QuickReplies extends Component<
         ) : (
           <Text style={styles.sendLinkText}>{sendText}</Text>
         )}
-      </TouchableOpacity>
+      </CustomTouchableOpacity>
     )
   }
 
@@ -180,7 +179,7 @@ export default class QuickReplies extends Component<
             const selected =
               type === 'checkbox' && replies.find(sameReply(reply))
             return (
-              <TouchableOpacity
+              <CustomTouchableOpacity
                 onPress={this.handlePress(reply)}
                 style={[
                   styles.quickReply,
@@ -200,7 +199,7 @@ export default class QuickReplies extends Component<
                 >
                   {reply.title}
                 </Text>
-              </TouchableOpacity>
+              </CustomTouchableOpacity>
             )
           },
         )}

@@ -1,10 +1,18 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { ActivityIndicator, Platform, StyleProp, StyleSheet, Text, TextStyle, View, ViewStyle } from 'react-native'
+import {
+  ActivityIndicator,
+  Platform,
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextStyle,
+  View,
+  ViewStyle,
+} from 'react-native'
 import Color from './Color'
 import { StylePropType } from './utils'
-
-import { TouchableOpacity } from '@gorhom/bottom-sheet'
+import CustomTouchableOpacity from './bottomSheet/TouchableOpacity'
 
 const styles = StyleSheet.create({
   container: {
@@ -95,7 +103,7 @@ export default class LoadEarlier extends React.Component<LoadEarlierProps> {
   }
   render() {
     return (
-      <TouchableOpacity
+      <CustomTouchableOpacity
         style={[styles.container, this.props.containerStyle]}
         onPress={() => {
           if (this.props.onLoadEarlier) {
@@ -108,7 +116,7 @@ export default class LoadEarlier extends React.Component<LoadEarlierProps> {
         <View style={[styles.wrapper, this.props.wrapperStyle]}>
           {this.renderLoading()}
         </View>
-      </TouchableOpacity>
+      </CustomTouchableOpacity>
     )
   }
 }
