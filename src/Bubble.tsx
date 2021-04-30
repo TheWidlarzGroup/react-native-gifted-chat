@@ -1,6 +1,14 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { Clipboard, StyleProp, StyleSheet, Text, TextStyle, View, ViewStyle } from 'react-native'
+import {
+  Clipboard,
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextStyle,
+  View,
+  ViewStyle,
+} from 'react-native'
 
 import QuickReplies from './QuickReplies'
 
@@ -13,7 +21,15 @@ import Time from './Time'
 import Color from './Color'
 
 import { isSameDay, isSameUser, StylePropType } from './utils'
-import { IMessage, LeftRightStyle, MessageAudioProps, MessageVideoProps, Omit, Reply, User } from './Models'
+import {
+  IMessage,
+  LeftRightStyle,
+  MessageAudioProps,
+  MessageVideoProps,
+  Omit,
+  Reply,
+  User,
+} from './Models'
 import CustomTouchableWithoutFeedback from './bottomSheet/TouchableWithoutFeedback'
 
 const styles = {

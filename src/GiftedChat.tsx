@@ -54,10 +54,13 @@ import {
   MessageAudioProps,
 } from './Models'
 import QuickReplies from './QuickReplies'
+import { ModalProvider } from './bottomSheet/ModalContext'
 
 dayjs.extend(localizedFormat)
 
 export interface GiftedChatProps<TMessage extends IMessage = IMessage> {
+  /* handle display in @gorhom/bottom-sheet */
+  displayInModal?: boolean
   /* Messages to display */
   messages?: TMessage[]
   /* Typing Indicator state */
@@ -730,7 +733,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
       }
     })
 
-    if (shouldResetInputToolbar === true) {
+    if (shouldResetInputToolbar) {
       this.setIsTypingDisabled(true)
       this.resetInputToolbar()
     }
@@ -738,9 +741,9 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
       this.props.onSend(newMessages)
     }
 
-    if (shouldResetInputToolbar === true) {
+    if (shouldResetInputToolbar) {
       setTimeout(() => {
-        if (this.getIsMounted() === true) {
+        if (this.getIsMounted()) {
           this.setIsTypingDisabled(false)
         }
       }, 100)
@@ -761,12 +764,6 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
       composerHeight: newComposerHeight,
       messagesContainerHeight: newMessagesContainerHeight,
     })
-  }
-
-  focusTextInput() {
-    if (this.textInput) {
-      this.textInput.focus()
-    }
   }
 
   onInputSizeChanged = (size: { height: number }) => {
@@ -825,10 +822,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   onMainViewLayout = (e: any) => {
     // fix an issue when keyboard is dismissing during the initialization
     const { layout } = e.nativeEvent
-    if (
-      this.getMaxHeight() !== layout.height ||
-      this.getIsFirstLayout() === true
-    ) {
+    if (this.getMaxHeight() !== layout.height || this.getIsFirstLayout()) {
       this.setMaxHeight(layout.height)
       this.setState({
         messagesContainerHeight:
@@ -837,7 +831,7 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
             : this.getBasicMessagesContainerHeight(),
       })
     }
-    if (this.getIsFirstLayout() === true) {
+    if (this.getIsFirstLayout()) {
       this.setIsFirstLayout(false)
     }
   }
@@ -880,21 +874,23 @@ class GiftedChat<TMessage extends IMessage = IMessage> extends React.Component<
   }
 
   render() {
-    if (this.state.isInitialized === true) {
-      const { wrapInSafeArea } = this.props
+    if (this.state.isInitialized) {
+      const { wrapInSafeArea, displayInModal } = this.props
       const Wrapper = wrapInSafeArea ? SafeAreaView : View
 
       return (
-        <Wrapper style={styles.safeArea}>
-          <ActionSheetProvider
-            ref={(component: any) => (this._actionSheetRef = component)}
-          >
-            <View style={styles.container} onLayout={this.onMainViewLayout}>
-              {this.renderMessages()}
-              {this.renderInputToolbar()}
-            </View>
-          </ActionSheetProvider>
-        </Wrapper>
+        <ModalProvider displayInModal={!!displayInModal}>
+          <Wrapper style={styles.safeArea}>
+            <ActionSheetProvider
+              ref={(component: any) => (this._actionSheetRef = component)}
+            >
+              <View style={styles.container} onLayout={this.onMainViewLayout}>
+                {this.renderMessages()}
+                {this.renderInputToolbar()}
+              </View>
+            </ActionSheetProvider>
+          </Wrapper>
+        </ModalProvider>
       )
     }
     return (

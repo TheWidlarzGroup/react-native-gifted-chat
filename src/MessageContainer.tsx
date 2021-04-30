@@ -21,7 +21,6 @@ import Color from './Color'
 import { IMessage, Reply, User } from './Models'
 import { StylePropType, warning } from './utils'
 import TypingIndicator from './TypingIndicator'
-import { ModalProvider } from './bottomSheet/ModalContext'
 import CustomTouchableOpacity from './bottomSheet/TouchableOpacity'
 import CustomFlatList from './bottomSheet/FlatList'
 
@@ -67,7 +66,6 @@ const styles = StyleSheet.create({
 })
 
 export interface MessageContainerProps<TMessage extends IMessage> {
-  displayInModal?: boolean
   messages?: TMessage[]
   isTyping?: boolean
   user?: User
@@ -101,7 +99,6 @@ export default class MessageContainer<
   TMessage extends IMessage = IMessage
 > extends React.PureComponent<MessageContainerProps<TMessage>, State> {
   static defaultProps = {
-    displayInModal: false,
     messages: [],
     user: {},
     isTyping: false,
@@ -336,45 +333,43 @@ export default class MessageContainer<
   keyExtractor = (item: TMessage) => `${item._id}`
 
   render() {
-    const { inverted, displayInModal } = this.props
+    const { inverted } = this.props
     return (
-      <ModalProvider displayInModal={!!displayInModal}>
-        <View
-          style={
-            this.props.alignTop ? styles.containerAlignTop : styles.container
+      <View
+        style={
+          this.props.alignTop ? styles.containerAlignTop : styles.container
+        }
+      >
+        {this.state.showScrollBottom && this.props.scrollToBottom
+          ? this.renderScrollToBottomWrapper()
+          : null}
+        <CustomFlatList
+          ref={this.props.forwardRef}
+          extraData={[this.props.extraData, this.props.isTyping]}
+          keyExtractor={this.keyExtractor}
+          enableEmptySections
+          automaticallyAdjustContentInsets={false}
+          inverted={inverted}
+          data={this.props.messages}
+          style={styles.listStyle}
+          contentContainerStyle={styles.contentContainerStyle}
+          renderItem={this.renderRow}
+          {...this.props.invertibleScrollViewProps}
+          ListEmptyComponent={this.renderChatEmpty}
+          ListFooterComponent={
+            inverted ? this.renderHeaderWrapper : this.renderFooter
           }
-        >
-          {this.state.showScrollBottom && this.props.scrollToBottom
-            ? this.renderScrollToBottomWrapper()
-            : null}
-          <CustomFlatList
-            ref={this.props.forwardRef}
-            extraData={[this.props.extraData, this.props.isTyping]}
-            keyExtractor={this.keyExtractor}
-            enableEmptySections
-            automaticallyAdjustContentInsets={false}
-            inverted={inverted}
-            data={this.props.messages}
-            style={styles.listStyle}
-            contentContainerStyle={styles.contentContainerStyle}
-            renderItem={this.renderRow}
-            {...this.props.invertibleScrollViewProps}
-            ListEmptyComponent={this.renderChatEmpty}
-            ListFooterComponent={
-              inverted ? this.renderHeaderWrapper : this.renderFooter
-            }
-            ListHeaderComponent={
-              inverted ? this.renderFooter : this.renderHeaderWrapper
-            }
-            onScroll={this.handleOnScroll}
-            scrollEventThrottle={100}
-            onLayout={this.onLayoutList}
-            onEndReached={this.onEndReached}
-            onEndReachedThreshold={0.1}
-            {...this.props.listViewProps}
-          />
-        </View>
-      </ModalProvider>
+          ListHeaderComponent={
+            inverted ? this.renderFooter : this.renderHeaderWrapper
+          }
+          onScroll={this.handleOnScroll}
+          scrollEventThrottle={100}
+          onLayout={this.onLayoutList}
+          onEndReached={this.onEndReached}
+          onEndReachedThreshold={0.1}
+          {...this.props.listViewProps}
+        />
+      </View>
     )
   }
 }

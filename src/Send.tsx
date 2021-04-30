@@ -1,7 +1,14 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { StyleProp, StyleSheet, Text, TextStyle, TouchableOpacityProps, View, ViewStyle } from 'react-native'
-
+import {
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextStyle,
+  TouchableOpacityProps,
+  View,
+  ViewStyle,
+} from 'react-native'
 
 import Color from './Color'
 import { IMessage } from './Models'
