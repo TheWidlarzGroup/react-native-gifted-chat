@@ -5,9 +5,9 @@ interface Props {
   displayInModal: boolean
 }
 
-type ModalContextValue = boolean
+type ModalContextValue = boolean | null
 
-const ModalContext = createContext<ModalContextValue>(false)
+const ModalContext = createContext<ModalContextValue>(null)
 
 export const ModalProvider: FC<Props> = ({ children, displayInModal }) => {
   return (
@@ -20,7 +20,7 @@ export const ModalProvider: FC<Props> = ({ children, displayInModal }) => {
 export const useModalContext = () => {
   const context = useContext(ModalContext)
 
-  if (context) {
+  if (typeof context !== 'boolean') {
     return context
   }
 

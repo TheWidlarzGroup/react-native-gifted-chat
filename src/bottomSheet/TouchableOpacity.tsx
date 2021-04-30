@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { forwardRef, ReactNode } from 'react'
 import { TouchableOpacity, TouchableOpacityProps } from 'react-native'
 import { TouchableOpacity as BottomSheetTouchableOpacity } from '@gorhom/bottom-sheet'
 import { useModalContext } from './ModalContext'
@@ -7,13 +7,16 @@ type Props = {
   children: ReactNode
 } & TouchableOpacityProps
 
-function CustomTouchableOpacity(props: Props) {
+function CustomTouchableOpacity(
+  props: Props,
+  ref: React.Ref<TouchableOpacity>,
+) {
   const displayInModal = useModalContext()
   return displayInModal ? (
-    <BottomSheetTouchableOpacity {...props} />
+    <BottomSheetTouchableOpacity {...props} ref={ref} />
   ) : (
-    <TouchableOpacity {...props} />
+    <TouchableOpacity {...props} ref={ref} />
   )
 }
 
-export default CustomTouchableOpacity
+export default forwardRef(CustomTouchableOpacity)
